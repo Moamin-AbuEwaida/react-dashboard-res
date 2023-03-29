@@ -2,6 +2,7 @@ import React from "react";
 import css from "./Dashboard.module.css";
 import { cardsData, groupNumber } from "../../data/index.js";
 import Statistics from "../../components/statistics/Statistics";
+import Orders from "../../components/orders/Orders";
 
 const Dashboard = () => {
   return (
@@ -36,7 +37,8 @@ const Dashboard = () => {
         </div>
         <Statistics />
       </div>
-      <div className={css.orders}>orders</div>
+
+      <Orders />
     </div>
   );
 };
