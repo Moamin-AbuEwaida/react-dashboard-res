@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Board, {
   moveCard,
   moveColumn,
@@ -10,6 +10,7 @@ import "./Board.css";
 import useBoard from "../../store/Board.js";
 import { RxCross2 } from "react-icons/rx";
 import { IoMdAdd } from "react-icons/io";
+import AddCardModal from "../../components/addCardModal/AddCardModal";
 
 const BoardPage = () => {
   const { board, setBoard } = useBoard();
@@ -54,6 +55,7 @@ const BoardPage = () => {
       };
     }
   };
+  const [modalOpened, setModalOpened] = useState(false);
   return (
     <div className="board-container">
       <span>Trello Board</span>
@@ -87,10 +89,30 @@ const BoardPage = () => {
           </div>
         )}
         renderColumnHeader={(props, i) => {
+          const handleCardAdd = (title, detail) => {
+            const card = {
+              id: new Date().getTime(),
+              title,
+              description: detail,
+            };
+            const updatedBoard = addCard(board, props, card);
+            setBoard(updatedBoard);
+            setModalOpened(false);
+          };
           return (
             <div className="column-header" key={i}>
               <span>{props.title}</span>
-              <IoMdAdd color="#fff" size={25} title="Add Card" />
+              <IoMdAdd
+                color="#fff"
+                size={25}
+                title="Add Card"
+                onClick={() => setModalOpened(true)}
+              />
+              <AddCardModal
+                visible={modalOpened}
+                onClose={() => setModalOpened(false)}
+                handleCardAdd={handleCardAdd}
+              />
             </div>
           );
         }}
