@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout';
 import BoardPage from './pages/board/Board';
 import Calendar from './pages/calendar/Calendar';
 import Dashboard from './pages/dashboard/Dashboard';
+import DataGrid from './pages/dataGrid/DataGrid';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='calendar' element={<Calendar /> } />
             <Route path='board' element={<BoardPage /> } />
+            <Route path='users' element={<DataGrid /> } />
           </Route>
           
         </Routes>
